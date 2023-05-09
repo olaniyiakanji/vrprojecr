@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Virtual Fitting Room</title>
+	<script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+	<script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v6.0.0/dist/aframe-extras.min.js"></script>
+	<link rel="stylesheet" href="vrumar.css">
+	<script src="vrumar.js"></script>
+	
+</head>
+<body>
+	<header>
+		<nav>
+		  <ul>
+			<li><a href="#">Home</a></li>
+			<li><a href="#">About</a></li>
+			<li><a href="#">Services</a></li>
+			<li><a href="#">Contact</a></li>
+		  </ul>
+		</nav>
+	  </header>
+	<span class = "sain">  
+	<div id="container">
+		<div id="aframe-container">
+			<a-scene>
+				<a-entity camera position="0 1.6 0">
+					<a-cursor></a-cursor>
+				</a-entity>
+				<a-entity id="model"></a-entity>
+			</a-scene>
+		</div>
+		<div id="ui-container">
+			<h1>Virtual Fitting Room</h1>
+			<form>
+				<label for="tops">Tops:</label>
+				<select id="tops">
+					<option value="blouse">Blouse</option>
+					<option value="shirt">Shirt</option>
+					<option value="t-shirt">T-Shirt</option>
+				</select>
+				<label for="bottoms">Bottoms:</label>
+				<select id="bottoms">
+					<option value="pants">Pants</option>
+					<option value="shorts">Shorts</option>
+					<option value="skirt">Skirt</option>
+				</select>
+				<button id="try-on">Try On</button>
+			</form>
+		</div>
+	</div>
+	<script>
+		const modelEntity = document.querySelector('#model');
+		const tops = document.querySelector('#tops');
+		const bottoms = document.querySelector('#bottoms');
+		const tryOnButton = document.querySelector('#try-on');
+		
+		// Load the selected model
+		function loadModel(model) {
+			modelEntity.setAttribute('gltf-model', `models/${model}.glb`);
+		}
+		
+		// Try on the selected outfit
+		function tryOn() {
+			const top = tops.value;
+			const bottom = bottoms.value;
+			
+			loadModel(`${top}-${bottom}`);
+		}
+		
+		// Add event listeners to the UI controls
+		tryOnButton.addEventListener('click', tryOn);
+	</script>
+	<div class="footer">
+		
+	  </div>
+	</span>
+	  <p>Copyright © 2023</p>
+</body>
+</html>
